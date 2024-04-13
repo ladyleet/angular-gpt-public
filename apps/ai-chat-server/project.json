@@ -1,0 +1,63 @@
+{
+  "name": "ai-chat-server",
+  "$schema": "../../node_modules/nx/schemas/project-schema.json",
+  "sourceRoot": "apps/ai-chat-server/src",
+  "projectType": "application",
+  "targets": {
+    "build": {
+      "executor": "@nx/esbuild:esbuild",
+      "outputs": ["{options.outputPath}"],
+      "defaultConfiguration": "production",
+      "options": {
+        "platform": "node",
+        "outputPath": "dist/apps/ai-chat-server",
+        "format": ["cjs"],
+        "bundle": false,
+        "main": "apps/ai-chat-server/src/main.ts",
+        "tsConfig": "apps/ai-chat-server/tsconfig.app.json",
+        "assets": ["apps/ai-chat-server/src/assets"],
+        "generatePackageJson": true,
+        "esbuildOptions": {
+          "sourcemap": true,
+          "outExtension": {
+            ".js": ".js"
+          }
+        }
+      },
+      "configurations": {
+        "development": {},
+        "production": {
+          "esbuildOptions": {
+            "sourcemap": false,
+            "outExtension": {
+              ".js": ".js"
+            }
+          }
+        }
+      }
+    },
+    "serve": {
+      "executor": "@nx/js:node",
+      "defaultConfiguration": "development",
+      "options": {
+        "buildTarget": "ai-chat-server:build"
+      },
+      "configurations": {
+        "development": {
+          "buildTarget": "ai-chat-server:build:development"
+        },
+        "production": {
+          "buildTarget": "ai-chat-server:build:production"
+        }
+      }
+    },
+    "test": {
+      "executor": "@nx/jest:jest",
+      "outputs": ["{workspaceRoot}/coverage/{projectRoot}"],
+      "options": {
+        "jestConfig": "apps/ai-chat-server/jest.config.ts"
+      }
+    }
+  },
+  "tags": []
+}

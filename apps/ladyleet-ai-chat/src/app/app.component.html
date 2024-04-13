@@ -1,0 +1,89 @@
+<mat-card class="centered-card-flex">
+  <mat-card-content>
+    <div class="angular-logo-container">
+      <img src="assets/angular_gradient.png" alt="Angular Logo" />
+    </div>
+    <div>
+      <h2 class="centered-content-flex">Angular GPT</h2>
+      <p class="centered-content-flex">
+        Angular GPT knows Angular 17 inside and out! Ask away about the latest
+        features that sparked the Angular Renaissance.
+      </p>
+      <p class="centered-content-flex">
+        From the power of signal-based reactivity for a lightning-fast app to
+        the independence of standalone components, get the scoop on everything
+        that makes Angular 17 so exciting. Let's build something amazing
+        together!
+      </p>
+      <p class="centered-content-flex">
+        Not sure what to ask? Check out some questions below!
+      </p>
+    </div>
+    <div class="button-container">
+      <button
+        mat-raised-button
+        color="primary"
+        (click)="
+          question.set('When was the lastest version of Angular released?')
+        "
+      >
+        When was the lastest version of Angular released?
+      </button>
+      <button
+        mat-raised-button
+        color="primary"
+        (click)="question.set('What is the latest syntax in Angular?')"
+      >
+        What is the latest syntax in Angular?
+      </button>
+    </div>
+
+    <div class="button-container">
+      <button
+        mat-raised-button
+        color="primary"
+        (click)="
+          question.set('What are some of the key features of the new Angular?')
+        "
+      >
+        What are some of the key features of the new Angular?
+      </button>
+      <button
+        mat-raised-button
+        color="primary"
+        (click)="question.set('Why should I care about the new Angular?')"
+      >
+        Why should I care about the new Angular?
+      </button>
+    </div>
+    <form (submit)="onSubmit($event)">
+      <mat-form-field appearance="outline">
+        <mat-label>Ask me about Angular!</mat-label>
+        <textarea
+          matInput
+          [value]="question()"
+          #questionInput
+          (input)="question.set(questionInput.value)"
+        >
+        </textarea>
+      </mat-form-field>
+      <button
+        color="accent"
+        mat-raised-button
+        class="send-button"
+        type="submit"
+      >
+        Send
+      </button>
+    </form>
+  </mat-card-content>
+</mat-card>
+<mat-card class="centered-card-flex">
+  <mat-card-content>
+    @if(thinking()) {
+    <div>thinking</div>
+    } @else {
+    {{ response() }}
+    }
+  </mat-card-content>
+</mat-card>

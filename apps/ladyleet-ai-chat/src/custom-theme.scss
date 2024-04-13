@@ -1,0 +1,126 @@
+// Custom Theming for Angular Material
+// For more information: https://material.angular.io/guide/theming
+@use '@angular/material' as mat;
+@use '@angular/material-experimental' as matx;
+
+// Plus imports for other components in your app.
+
+// Include the common styles for Angular Material. We include this here so that you only
+// have to load a single css file for Angular Material in your app.
+// Be sure that you only ever include this mixin once!
+@include mat.core();
+
+// Define the palettes for your theme using the Material Design palettes available in palette.scss
+// (imported above). For each palette, you can optionally specify a default, lighter, and darker
+// hue. Available color palettes: https://material.io/design/color/
+$ladyleet-ai-chat-primary: mat.define-palette(mat.$indigo-palette);
+$ladyleet-ai-chat-accent: mat.define-palette(
+  mat.$pink-palette,
+  A200,
+  A100,
+  A400
+);
+
+// The warn palette is optional (defaults to red).
+$ladyleet-ai-chat-warn: mat.define-palette(mat.$red-palette);
+
+// Create the theme object. A theme consists of configurations for individual
+// theming systems such as "color" or "typography".
+$ladyleet-ai-chat-theme: mat.define-light-theme(
+  (
+    color: (
+      primary: $ladyleet-ai-chat-primary,
+      accent: $ladyleet-ai-chat-accent,
+      warn: $ladyleet-ai-chat-warn,
+    ),
+    typography: mat.define-typography-config(),
+    density: 0,
+  )
+);
+
+// Include theme styles for core and each component used in your app.
+// Alternatively, you can import and @include the theme mixins for each component
+// that you are using.
+@include mat.all-component-themes($ladyleet-ai-chat-theme);
+
+//material 3 https://material.angular.io/guide/material-3
+
+$theme: matx.define-theme(
+  (
+    color: (
+      theme-type: light,
+      primary: matx.$m3-yellow-palette,
+      tertiary: matx.$m3-yellow-palette,
+    ),
+    typography: (
+      brand-family: 'Roboto',
+    ),
+    density: (
+      scale: -1,
+    ),
+  )
+);
+
+//Include theme styles for core and each component used in your app. Alternatively, you can import and @include the theme mixins for each component that you are using.
+
+html {
+  @include mat.all-component-themes($theme);
+  @include matx.color-variants-back-compat($theme);
+}
+
+html,
+body {
+  height: 100%;
+}
+body {
+  margin: 0;
+  font-family: Roboto, 'Helvetica Neue', sans-serif;
+}
+
+.centered-card-flex {
+  display: flex;
+  margin: 30px;
+}
+
+.centered-content-flex {
+  display: flex;
+  justify-content: center;
+  margin-top: 20px;
+}
+
+.send-button {
+  margin: 20px;
+}
+
+.button-container {
+  display: flex;
+  justify-content: space-evenly;
+
+  button {
+    // Assuming the buttons are direct children of the container
+    margin: 15px; // Adjust as needed
+    padding: 25px;
+  }
+}
+
+.angular-logo-container {
+  display: flex;
+  justify-content: center; // Center the image horizontally
+  align-items: center; // Center the image vertically
+
+  img {
+    flex: 0 1 10%; // This makes the image take up 50% of the container's width
+    max-width: 10%; // This ensures the image doesn't overflow the container
+    object-fit: contain; // This ensures the image maintains its aspect ratio
+  }
+}
+
+.full-width {
+  width: 100%;
+  max-width: 100%;
+}
+
+.form-input-styling {
+  display: flex;
+  justify-content: space-evenly;
+}
